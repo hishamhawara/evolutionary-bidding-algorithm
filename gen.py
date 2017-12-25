@@ -6,11 +6,13 @@ import random
 
 def gen_samples(n,T,bound):
 	strats = [[]]*n
-	for i in range(n):
+	for k in range(4):
 		m_cste = randint(1, bound)
 		m_i = [int(1000*random.random()) for i in range(0,T)]
 		m_matrix = [[[random.random() for j in range(nb,T)] for nb in range(i+1)] for i in range(T-1)]
-		strats[i] = [m_cste,m_i,m_matrix]
+		strats[k] = [m_cste,m_i,m_matrix]
+
+
 	return strats
     #m_matrix[i][nb][j-nb]
 	#bid = m_cste + m_i[i] + sum(m_matrix[i][nb][j-nb] * v[j] for j in range(nb,T))
@@ -71,7 +73,7 @@ def game(strats, T):
 	return winner
 
 def tournament(strats, tries, T):
-	strats_real = strats.copy()
+	strats_real = list(strats)
 	val = [0 for i in range(len(strats))]
 
 	strats = [i for i in range(len(strats))]
